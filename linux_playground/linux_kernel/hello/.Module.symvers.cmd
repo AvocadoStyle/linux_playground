@@ -1,0 +1,1 @@
+savedcmd_/home/armando/git_repos/linux_playground/linux_playground/linux_kernel/hello/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/armando/git_repos/linux_playground/linux_playground/linux_kernel/hello/Module.symvers -T /home/armando/git_repos/linux_playground/linux_playground/linux_kernel/hello/modules.order -i Module.symvers -e 
