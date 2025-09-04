@@ -7,8 +7,8 @@ readme = "README.md"
 packages = [{include = "linux_playground"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-evdev = "^1.6.1"
+python = "^3.9"
+evdev = { version = "^1.6.1", markers = "sys_platform == 'linux'" }
 
 [build-system]
 requires = ["poetry-core"]
