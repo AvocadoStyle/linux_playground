@@ -7,8 +7,10 @@ readme = "README.md"
 packages = [{include = "linux_playground"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 evdev = "^1.6.1"
+python-dotenv = "^1.1.1"
+requests = "^2.32.5"
 
 [build-system]
 requires = ["poetry-core"]
