@@ -8,7 +8,7 @@ packages = [{include = "linux_playground"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-evdev = "^1.6.1"
+evdev = { version = "^1.6.1", markers = "sys_platform == 'linux'" }
 python-dotenv = "^1.1.1"
 requests = "^2.32.5"
 
