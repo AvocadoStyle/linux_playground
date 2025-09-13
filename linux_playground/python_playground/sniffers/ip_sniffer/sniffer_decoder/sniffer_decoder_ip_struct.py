@@ -3,7 +3,6 @@ import socket
 import struct
 from typing import Any, Optional
 
-from linux_playground.python_playground.sniffers.ip_sniffer.packet_sniffing_win_linux import packet_sniffing_script_root_prvlg
 from linux_playground.utils.constants import IP_PROTOCOL_MAP
 from linux_playground.utils.dir_utils.config_utils import config_load_yaml
 
