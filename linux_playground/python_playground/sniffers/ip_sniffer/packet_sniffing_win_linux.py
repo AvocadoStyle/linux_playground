@@ -44,6 +44,6 @@ if __name__ == '__main__':
     host_ip = targets[1]['ip']
     target_ip = targets[2]['ip']
 
-    raw_bytes_value: bytes = packet_sniffing_script_root_prvlg(host_ip)
+    raw_bytes_value: bytes = packet_sniffing_script_root_prvlg(host_ip)[0]
     print(f"raw_bytes_value: {raw_bytes_value}")
     
