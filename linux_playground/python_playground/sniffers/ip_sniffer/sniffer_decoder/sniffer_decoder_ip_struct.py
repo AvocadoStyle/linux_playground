@@ -1,9 +1,9 @@
 import os
 import socket
 import struct
-from typing import Any
+from typing import Any, Optional
 
-from linux_playground.python_playground.sniffers.sniffer.packet_sniffing_windows_linux import packet_sniffing_script_root_prvlg
+from linux_playground.python_playground.sniffers.ip_sniffer.packet_sniffing_win_linux import packet_sniffing_script_root_prvlg
 from linux_playground.utils.dir_utils.config_utils import config_load_yaml
 
 class IpHdrDecoder:
@@ -28,11 +28,28 @@ class IpHdrDecoder:
         self.dst = self.header[9]
         self.ip_src = socket.inet_ntoa(struct.pack('I', self.src))
         self.ip_dst = socket.inet_ntoa(struct.pack('I', self.dst))
+        self.protocol_map = {1: 'ICMP', 6: 'TCP', 17: 'UDP'}
+        self.protocol_name: Optional[str] = None
+        try:
+            self.set_protocol()
+        except Exception as e:
+            print(f"[error] protocol did not set properly")
+            raise e
+
+    
+    def set_protocol(self):
+        self.protocol_name = self.protocol_map[self.protocol] 
 
 
 if __name__ == '__main__':
-    current_file_path = os.path.join(os.path.dirname(__file__), 'ip_sniffing_config.yaml')
-    config_data: Any = config_load_yaml(current_file_path)
+    IP_CONFIG_FILE_NAME = 'ip_sniffing_config.yaml'
+    from pathlib import Path
+    current_file_path = Path(__file__)
+    main_directory = current_file_path.parent.parent
+    ip_config_file_path = main_directory.joinpath('configuration', 'ip_sniffing_config.yaml')
+    assert ip_config_file_path.is_file()
+    ip_config_file_path = str(ip_config_file_path)
+    config_data: Any = config_load_yaml(ip_config_file_path)
     targets: list = config_data.get("targets")
     host_ip: str = targets[1]['ip']
     target_ip: str = targets[2]['ip']
