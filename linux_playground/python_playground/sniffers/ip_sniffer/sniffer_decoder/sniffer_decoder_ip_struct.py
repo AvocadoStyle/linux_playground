@@ -4,6 +4,7 @@ import struct
 from typing import Any, Optional
 
 from linux_playground.python_playground.sniffers.ip_sniffer.packet_sniffing_win_linux import packet_sniffing_script_root_prvlg
+from linux_playground.utils.constants import IP_PROTOCOL_MAP
 from linux_playground.utils.dir_utils.config_utils import config_load_yaml
 
 class IpHdrDecoder:
@@ -28,7 +29,9 @@ class IpHdrDecoder:
         self.dst = self.header[9]
         self.ip_src = socket.inet_ntoa(struct.pack('I', self.src))
         self.ip_dst = socket.inet_ntoa(struct.pack('I', self.dst))
-        self.protocol_map = {1: 'ICMP', 6: 'TCP', 17: 'UDP'}
+        self.protocol_map = {IP_PROTOCOL_MAP.ICMP.value: IP_PROTOCOL_MAP.ICMP.name,
+                             IP_PROTOCOL_MAP.TCP.value: IP_PROTOCOL_MAP.TCP.name,
+                             IP_PROTOCOL_MAP.TCP.value: IP_PROTOCOL_MAP.TCP.name}
         self.protocol_name: Optional[str] = None
         try:
             self.set_protocol()
