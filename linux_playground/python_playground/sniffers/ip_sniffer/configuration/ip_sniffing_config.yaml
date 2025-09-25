@@ -3,7 +3,7 @@ device: "eth0"  # or wlan0, en0, etc. depending on your system
 targets:
   - ip: "192.168.1.1"
     label: "Router"
-  - ip: "192.168.1.18"
+  - ip: "10.113.241.193"
     label: "My PC"
   - ip: "8.8.8.8"
     label: "Google DNS"
