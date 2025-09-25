@@ -26,10 +26,11 @@ class Scanner:
     
     def _sniffer_setup(self):
         if is_windows_os():
-            socket_porotocol = socket.IPPROTO_IP
+            logging.info(f"Running on Windows OS")
+            socket_protocol = socket.IPPROTO_IP
         else:
             socket_protocol = socket.IPPROTO_ICMP
-
+        logging.info(f"socket_protocol: {socket_protocol}")
         self.sniffer = socket.socket(socket.AF_INET, type=socket.SOCK_RAW, proto=socket_protocol)
         self.sniffer.bind((host_ip, 0))
         self.sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
@@ -95,7 +96,7 @@ if __name__ == '__main__':
     host_ip = targets[1]['ip']
     target_ip = targets[2]['ip']
 
-    scanner = Scanner(host_ip=host_ip, subnet="192.168.1.0/24", message="hey")
+    scanner = Scanner(host_ip=host_ip, subnet="10.113.241.0/24", message="hey")
     t1 = threading.Thread(target=udp_sender)
     t1.start()
     scanner.continuesly_sniffer_decoder()
