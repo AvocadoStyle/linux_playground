@@ -12,6 +12,7 @@ evdev = { version = "^1.6.1", markers = "sys_platform == 'linux'" }
 python-dotenv = "^1.1.1"
 requests = "^2.32.5"
 pyyaml = "^6.0.2"
+scapy = "^2.6.1"
 
 [build-system]
 requires = ["poetry-core"]
