@@ -43,21 +43,24 @@ class IpHdrDecoder:
         self.protocol_name = self.protocol_map[self.protocol] 
 
 
-if __name__ == '__main__':
-    IP_CONFIG_FILE_NAME = 'ip_sniffing_config.yaml'
-    from pathlib import Path
-    current_file_path = Path(__file__)
-    main_directory = current_file_path.parent.parent
-    ip_config_file_path = main_directory.joinpath('configuration', 'ip_sniffing_config.yaml')
-    assert ip_config_file_path.is_file()
-    ip_config_file_path = str(ip_config_file_path)
-    config_data: Any = config_load_yaml(ip_config_file_path)
-    targets: list = config_data.get("targets")
-    host_ip: str = targets[1]['ip']
-    target_ip: str = targets[2]['ip']
+# if __name__ == '__main__':
+#     # getting the configfile data
+#     IP_CONFIG_FILE_NAME = 'ip_sniffing_config.yaml'
+#     # checking if the configfile data is exists
+#     from pathlib import Path
+#     current_file_path = Path(__file__)
+#     main_directory = current_file_path.parent.parent
+#     ip_config_file_path = main_directory.joinpath('configuration', 'ip_sniffing_config.yaml')
+#     assert ip_config_file_path.is_file()
+#     ip_config_file_path = str(ip_config_file_path)
+#     config_data: Any = config_load_yaml(ip_config_file_path)
+#     # gets the data from the file
+#     targets: list = config_data.get("targets")
+#     host_ip: str = targets[1]['ip']
+#     target_ip: str = targets[2]['ip']
 
-    raw_bytes_value: bytes = packet_sniffing_script_root_prvlg(host_ip)[0]
-    print(f"raw_bytes_value: {raw_bytes_value}")
-    ip_hdr_dec = IpHdrDecoder(buffer=raw_bytes_value)
-    print(ip_hdr_dec.ip_src)
-    print(ip_hdr_dec.ip_dst)
+#     raw_bytes_value: bytes = packet_sniffing_script_root_prvlg(host_ip)[0]
+#     print(f"raw_bytes_value: {raw_bytes_value}")
+#     ip_hdr_dec = IpHdrDecoder(buffer=raw_bytes_value)
+#     print(ip_hdr_dec.ip_src)
+#     print(ip_hdr_dec.ip_dst)

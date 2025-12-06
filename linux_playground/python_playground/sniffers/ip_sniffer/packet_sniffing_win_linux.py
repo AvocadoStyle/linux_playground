@@ -94,9 +94,10 @@ if __name__ == '__main__':
 
     targets = config_data.get("targets")
     host_ip = targets[1]['ip']
+    host_ip_subnet = targets[1]['subnet']
     target_ip = targets[2]['ip']
 
-    scanner = Scanner(host_ip=host_ip, subnet="10.113.241.0/24", message="hey")
+    scanner = Scanner(host_ip=host_ip, subnet=host_ip_subnet, message="hey")
     t1 = threading.Thread(target=udp_sender)
     t1.start()
     scanner.continuesly_sniffer_decoder()
