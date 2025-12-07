@@ -12,7 +12,7 @@ import re
 import sys
 import zlib
 from linux_playground.utils.protocol_utils.http_utils import HTTP_PROTCOL_HEADER_NAMES, HTTP_PROTOCOL_CONTENT_TYPE_TYPES
-from linux_playground.utils.path_utils.specific_paths import package_reports_path
+from linux_playground.utils.path_utils.specific_paths import package_reports_path, relative_path
 
 
 Response = collections.namedtuple('Response', ['header', 'payload'])
@@ -43,12 +43,34 @@ def extract_content(Response: Response, content_name=HTTP_PROTOCOL_CONTENT_TYPE_
     
     return content, content_type
 
+def extract_image(headers, http_payload):
+    image = None
+    image_type = None
+
+    try:
+        if "image" in headers['Content-Type']:
+            # grab the image type and image body
+            image_type = headers['Content-Type'].split("/")[1]
+            image = http_payload[http_payload.index("\r\n\r\n") + 4:]
+            # if we detect compression decompress the image
+            try:
+                if "Content-Encoding" in list(headers.keys()):
+                    if headers['Content-Encoding'] == "gzip":
+                        image = zlib.decompress(image, 16 + zlib.MAX_WBITS)
+                    elif headers['Content-Encoding'] == "deflate":
+                        image = zlib.decompress(image)
+            except:
+                pass
+    except:
+        return None, None
+    return image, image_type
 
 
 
 class Recapper:
     def __init__(self, fname):
         self._fname = fname
+        # reading pcap file 
         pcap = rdpcap(fname)
         self.sessions = pcap.sessions()
         self.responses = list()
@@ -83,7 +105,7 @@ class Recapper:
 
 
 if __name__ == '__main__':
-    pfile = os.path.join(package_reports_path, 'arper.pcap')
+    pfile = os.path.join(package_reports_path, relative_path(os.path.join('..', 'scapy_arp_sniffer', 'arper.pcap')))
     recapper = Recapper(fname=pfile)
     recapper.get_responses()
     recapper.write(content_name='image')

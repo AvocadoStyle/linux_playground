@@ -1,0 +1,28 @@
+device: "eth0"  # or wlan0, en0, etc. depending on your system
+
+targets:
+  - ip: "192.168.1.1"
+    label: "Router"
+    subnet: "192.168.1.0/24"
+  - ip: "192.168.1.18"
+    label: "My PC"
+    subnet: "192.168.1.0/24"
+  - ip: "192.168.1.27"
+    label: "victim"
+    subnet: "192.168.1.0/24"
+  - ip: "8.8.8.8"
+    label: "Google DNS"
+
+# filter:
+#   protocols:
+#     - TCP
+#     - UDP
+#   ports:
+#     - 80
+#     - 443
+#     - 53
+
+# options:
+#   log_to_file: true
+#   output_file: "sniffed_packets.log"
+#   max_packets: 100
