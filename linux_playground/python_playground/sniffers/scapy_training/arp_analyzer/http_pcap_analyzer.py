@@ -75,23 +75,22 @@ class Recapper:
         self.sessions = pcap.sessions()
         self.responses = list()
 
-    def get_responses(self):
-        for session in self.sessions:
+    def get_http_responses(self):
+        for session, packets in self.sessions.items():
             payload = b''
-            for packet in self.sessions[session]:
+            for packet in packets:    
                 try:
                     if packet[TCP].dport == 80 or packet[TCP].sport == 80:
                         payload += bytes(packet[TCP].payload)
-                except IndexError as ie:
-                    sys.stdout.write('x')
-                    sys.stdout.flush()
-
+                except:
+                    pass
+            
             if payload:
                 header = get_http_header(payload)
                 if header is None:
                     continue
                 self.responses.append(Response(header=header, payload=payload))
-    
+
 
 
     def write(self, content_name, save_directory_path=package_reports_path):
@@ -107,5 +106,5 @@ class Recapper:
 if __name__ == '__main__':
     pfile = os.path.join(package_reports_path, relative_path(os.path.join('..', 'scapy_arp_sniffer', 'arper.pcap')))
     recapper = Recapper(fname=pfile)
-    recapper.get_responses()
+    recapper.get_http_responses()
     recapper.write(content_name='image')

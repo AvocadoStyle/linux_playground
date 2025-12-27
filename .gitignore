@@ -61,3 +61,9 @@ Thumbs.db
 
 # Networking
 *.pcap
+
+# Videos format
+*.avi
+
+# C Compiled output files
+*.out
