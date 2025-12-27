@@ -1,6 +1,9 @@
 video_device:
   - device_id: 0
-    fps: 20.0
-    output_file: output.avi
+    fps: 60.0
+    output_file: output.mp4
+#    output_file: output.avi
+    codec: mp4v
+#    codec: XVID
 #  - device_id: 1
 #    fps: 30.0
