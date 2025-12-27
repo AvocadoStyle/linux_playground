@@ -1,0 +1,6 @@
+video_device:
+  - device_id: 0
+    fps: 20.0
+    output_file: output.avi
+#  - device_id: 1
+#    fps: 30.0
