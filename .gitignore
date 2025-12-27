@@ -64,6 +64,7 @@ Thumbs.db
 
 # Videos format
 *.avi
+*.mp4
 
 # C Compiled output files
 *.out
