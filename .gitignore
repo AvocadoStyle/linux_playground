@@ -68,3 +68,5 @@ Thumbs.db
 
 # C Compiled output files
 *.out
+
+*.csv
