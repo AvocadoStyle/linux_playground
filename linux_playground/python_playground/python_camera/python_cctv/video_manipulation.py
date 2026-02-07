@@ -4,6 +4,8 @@ from enum import Enum, auto
 import cv2
 import numpy as np
 
+from linux_playground.python_playground.python_camera.python_cctv.face_detection import HaarPersonDetection, \
+    DNNPersonDetection
 from linux_playground.utils.dir_utils.config_utils import config_load_yaml
 from linux_playground.utils.path_utils.specific_paths import relative_path
 
@@ -67,13 +69,16 @@ def video_capture():
     fourcc = cv2.VideoWriter_fourcc(*f"{codec}")
     out = cv2.VideoWriter(output_file_name, fourcc, fps, (width, height))
 
+    face_detection_v2 = DNNPersonDetection()
+
     while True:
         ret, frame = video_cap.read()
         if not ret:
             break
 
 
-        frame, is_face_detected = face_detection(frame)
+        # frame, is_face_detected = face_detection(frame) # old facedetection
+        frame, is_face_detected = face_detection_v2.detect(frame)
         if is_face_detected:
             print("face detected!")
 
