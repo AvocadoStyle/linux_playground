@@ -72,10 +72,10 @@ class DNNPersonDetection(PersonDetectionStrategy):
                 box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
                 (x1, y1, x2, y2) = box.astype(int)
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
-                cv2.triangulatePoints(frame)
+                # cv2.triangulatePoints(frame)
                 is_face_detected = True
         return frame, is_face_detected
 
 
-class DNNPersonDetection()
+# class DNNPersonDetection()
 
