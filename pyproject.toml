@@ -19,6 +19,8 @@ pandas = "^2.3.3"
 opencv-python = "^4.12.0.88"
 jupyterlab = "^4.5.1"
 av = "^16.1.0"
+pillow = "^12.1.0"
+onnxruntime = "^1.24.2"
 
 [build-system]
 requires = ["poetry-core"]
