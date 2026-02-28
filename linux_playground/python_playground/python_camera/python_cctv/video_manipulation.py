@@ -69,10 +69,11 @@ def video_capture():
     fourcc = cv2.VideoWriter_fourcc(*f"{codec}")
     out = cv2.VideoWriter(output_file_name, fourcc, fps, (width, height))
 
-    # face_detection_v2 = CNNPersonDetection()
     detection_frames_freq = 1
+    # face_detection_v3 = CNNPersonDetection()
     face_detection_v2 = DNNPersonFaceDetection()
-    # face_detection_v2 = HaarPersonFaceDetection()
+    # face_detection_v1 = HaarPersonFaceDetection()
+    # face_detection_v2 = face_detection_v3 
 
     freq_cnt = 0
     while True:
