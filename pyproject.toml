@@ -21,6 +21,9 @@ jupyterlab = "^4.5.1"
 av = "^16.1.0"
 pillow = "^12.1.0"
 onnxruntime = "^1.24.2"
+scipy = "^1.17.1"
+matplotlib = "^3.10.8"
+python-vlc = "^3.0.21203"
 
 [build-system]
 requires = ["poetry-core"]
