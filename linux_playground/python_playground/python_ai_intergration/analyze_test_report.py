@@ -153,7 +153,7 @@ def build_failure_analysis(df: pd.DataFrame) -> str:
     return "\n".join(lines)
 
 
-def ask_llm(data_summary: str, summary_sheet: str) -> str:
+def llm_prompt(data_summary: str, summary_sheet: str) -> str:
     """Send the analysis to the LLM and get a feedback report."""
     prompt = f"""You are a hardware test report analyst for power converter products.
 Analyze the following test data from a GEN4 S600A power converter verification test.
@@ -187,7 +187,11 @@ Based on this data, provide a comprehensive feedback report covering:
    - Suggested design or test improvements.
 
 Keep the report professional, concise, and actionable."""
+    return prompt
 
+
+def ask_llm(data_summary: str, summary_sheet: str) -> str:
+    prompt = llm_prompt(data_summary, summary_sheet)
     print(f"\n  Sending to {MODEL} for analysis (this may take a while on 8GB RAM)...")
     print(f"  Prompt size: ~{len(prompt)} chars")
 
