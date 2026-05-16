@@ -1,0 +1,17 @@
+{
+  "parts": [
+    {
+      "type": "esp32",
+      "id": "esp32dev"
+    },
+    {
+      "type": "led",
+      "id": "led1"
+    }
+  ],
+  "connections": [
+    ["esp32dev:GPIO2", "led1:A", {}],
+    ["esp32dev:GND", "led1:K", {}]
+  ],
+  "version": 1
+}
