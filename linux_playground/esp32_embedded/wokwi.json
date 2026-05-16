@@ -1,0 +1,9 @@
+{
+  "name": "esp32-blink",
+  "author": "armando",
+  "description": "ESP32 blink project",
+  "editor": "default",
+  "partsFile": "diagram.json",
+  "firmwareFile": ".pio/build/esp32dev/firmware.bin",
+  "version": 1
+}
